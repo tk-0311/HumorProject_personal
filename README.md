@@ -1,3 +1,9 @@
+# HumorProject Personal
+
+The app now lives directly in this repository root (`HumorProject_personal/` locally). Run npm, Next.js, TypeScript, and Supabase commands here. The old nested `hello-world/` directory is no longer the application root.
+
+For Vercel, set **Settings → Build and Deployment → Root Directory** to the repository root (`.` or the empty default). Keep the existing production environment variables and OAuth URLs; a local folder rename does not change the hosted domain.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

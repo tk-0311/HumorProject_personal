@@ -11,7 +11,7 @@ import { generateWithChain } from '@/lib/ai/generate-captions';
 import { ProviderError } from '@/lib/ai/ai-provider';
 import { ChainFailure, type ChainFailureContext } from '@/lib/ai/chain-diagnostics';
 import { recordTelemetry } from '@/lib/telemetry';
-import { loadModelCatalog, type ModelCatalog } from '@/lib/ai/models';
+
 
 export type CaptionOptionsState = { error: string; draftId: string; captions: string[] };
 export async function generateCaptionOptions(form: FormData): Promise<CaptionOptionsState> {
@@ -36,20 +36,17 @@ export async function generateCaptionOptions(form: FormData): Promise<CaptionOpt
   catch (error) { return failure((error as Error).message); }
   const imageBytes = Buffer.from(photo.bytes);
   telemetryContext = { surface: 'humor_project', phase: 'chain_configuration' };
-  let catalog: ModelCatalog;
-  try { catalog = await loadModelCatalog(supabase); }
-  catch { return failure('Caption generation is temporarily unavailable. Please try again later.', 'configuration'); }
   const { data: allowed, error: limitError } = await supabase.rpc('claim_caption_attempt');
   if (limitError) return failure('Could not check your generation allowance. Please try again.');
   if (!allowed) return failure('You’ve generated your 10 caption sets for today. Come back tomorrow (UTC).');
-  const configuredChainResult = await supabase.rpc('get_humor_project_caption_prompt_chain');
+  const configuredChainResult = await supabase.rpc('get_prompt_chain_for_surface', { p_surface: 'humor_project', p_include_disabled: false });
   const promptChain = parseCaptionPromptChain(configuredChainResult.data);
   if (configuredChainResult.error || !promptChain) return failure('Caption generation is temporarily unavailable. Please try again later.', 'configuration');
   const prompt = `Caption chain: ${promptChain.steps.map(step => step.title).join(' → ')}`;
   let captions: string[];
   let modelUsed: string;
   try {
-    const result = await generateWithChain(supabase, catalog, promptChain, 'all',
+    const result = await generateWithChain(supabase, promptChain, 'all',
       { mimeType: photo.mime, base64: imageBytes.toString('base64') },
       (model, status) => { telemetryModel = model; telemetryProviderStatus = status; });
     captions = result.captions; modelUsed = result.model;

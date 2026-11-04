@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import { createClient } from '@/utils/supabase/server';
 import NavBar from '@/app/components/NavBar';
 import GenerationForm from './GenerationForm';
+export const maxDuration = 300;
 export default async function NewCaptionPage() {
   const supabase = createClient(await cookies());
   const { data: { user } } = await supabase.auth.getUser();

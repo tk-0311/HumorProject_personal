@@ -26,7 +26,7 @@ export function stepFailure(
   const step = chain.steps[index];
   return new ChainFailure(message, { phase, stepId: step?.id, stepIndex: index + 1,
     stepCount: chain.steps.length, stepPosition: (step?.position ?? index) + 1,
-    stepTitle: step?.title, provider: model?.provider, includeImage: step?.includeImage,
+    stepTitle: step?.title, provider: model?.provider, includeImage: step?.include_image,
     ...(startedAt === undefined ? {} : { stepDurationMs: Math.min(120000, Math.max(0, Date.now() - startedAt)) }),
   }, model?.model_id, status);
 }

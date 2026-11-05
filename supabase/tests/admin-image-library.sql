@@ -44,7 +44,7 @@ do $$ declare page jsonb; image jsonb; links jsonb; bucket text; expected bigint
         raise exception 'Linked records must match the deletion guard and use bounded pages.';
       end if;
       if exists(select 1 from jsonb_array_elements(links->'records') record
-        where record->>'kind' not in ('caption','draft','profile','post') or record ? 'prompt' or record ? 'email') then
+        where record->>'kind' not in ('caption','draft','profile','post','chain_run','chain_step') or record ? 'prompt' or record ? 'email') then
         raise exception 'Unexpected linked-record fields.';
       end if;
       if jsonb_array_length(public.admin_get_image_linked_records((image->>'id')::uuid, 1000000)->'records') <> 0 then

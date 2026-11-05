@@ -67,7 +67,7 @@ export async function generateCaptionOptions(form: FormData): Promise<CaptionOpt
   catch { return failure('Your photo could not be checked or saved. Please try again.'); }
   telemetryContext = { surface: 'humor_project', phase: 'draft_save' };
   // Options, prompt, and image stay private until the owner chooses a caption.
-  const { data, error } = await supabase.from('caption_drafts').insert({ user_id: user.id, image_path: imagePath, prompt, style: 'mixed', model: modelUsed, captions }).select('id').single();
+  const { data, error } = await supabase.rpc('save_caption_draft',{p_image_path:imagePath,p_prompt:prompt,p_style:'mixed',p_model:modelUsed,p_captions:captions});
   if (error || !data) {
     // This photo may be shared with a simultaneous draft save. Unused files can
     // be removed from the admin image library without deleting another draft's photo.
@@ -75,7 +75,7 @@ export async function generateCaptionOptions(form: FormData): Promise<CaptionOpt
       ? 'You’ve generated your 10 caption sets for today. Come back tomorrow (UTC).'
       : 'Your caption options could not be saved. Please try again.');
   }
-  return finish({ error: '', draftId: data.id, captions }, true);
+  return finish({ error: '', draftId: data as string, captions }, true);
 }
 
 export async function publishCaptionChoice(draftId: string, index: number): Promise<{ error: string; id: string }> {

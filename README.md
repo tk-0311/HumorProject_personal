@@ -13,6 +13,8 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 First, run the development server:
 
+`npm run dev` explicitly uses port **3000**. Run the other apps in separate terminals: `HP_admin_panel` uses **4300**, and `prompt_chain` uses **4400**. The local caption-service URL is `http://localhost:4400`.
+
 ```bash
 npm run dev
 # or

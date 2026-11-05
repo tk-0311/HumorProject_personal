@@ -48,7 +48,7 @@ do $$ begin
 end; $$;
 reset role;
 select set_config('draft_test.post_snapshot',(select to_jsonb(g)::text from public.ai_generations g where id=current_setting('draft_test.published')::uuid),true);
-select set_config('draft_test.metadata',(select (to_jsonb(d)-'captions'-'style'-'image_path')::text from public.caption_drafts d where id=current_setting('draft_test.first')::uuid),true);
+select set_config('draft_test.metadata',(select (to_jsonb(d)-'captions'-'style'-'image_path'-'content_key'-'edit_revision')::text from public.caption_drafts d where id=current_setting('draft_test.first')::uuid),true);
 
 select set_config('request.jwt.claims',jsonb_build_object('sub',current_setting('draft_test.admin'),'role','authenticated')::text,true);
 set local role authenticated;
@@ -67,7 +67,7 @@ begin
   before_other:=private.admin_image_reference_count('caption-images',other_name);
   perform public.admin_save_linked_draft(source_id,first_id,
     array['Moved dry one','Moved dry two','Moved dry three','Moved warm one','Moved warm two','Moved warm three','Moved absurd one','Moved absurd two','Moved absurd three'],'mixed',other_name);
-  if (select to_jsonb(d)-'captions'-'style'-'image_path' from public.caption_drafts d where id=first_id)<>current_setting('draft_test.metadata')::jsonb then raise exception 'Draft owner, selected index, publication link, or generation metadata changed'; end if;
+  if (select to_jsonb(d)-'captions'-'style'-'image_path'-'content_key'-'edit_revision' from public.caption_drafts d where id=first_id)<>current_setting('draft_test.metadata')::jsonb then raise exception 'Draft owner, selected index, publication link, or generation metadata changed'; end if;
   if (select to_jsonb(g) from public.ai_generations g where id=current_setting('draft_test.published')::uuid)<>current_setting('draft_test.post_snapshot')::jsonb then raise exception 'Editing a published draft changed its post'; end if;
   if not exists(select 1 from public.caption_drafts where id=legacy_id and style='absurd' and cardinality(captions)=3 and published_generation_id is null) then raise exception 'Legacy draft edit or unpublished state failed'; end if;
   if private.admin_image_reference_count('caption-images',source_name)<>before_source-1
@@ -107,7 +107,7 @@ begin
     or not exists(select 1 from public.ai_generations where id=current_setting('draft_test.legacy_published')::uuid) then raise exception 'Deleting a draft affected a published caption'; end if;
   select count(*) into used from public.caption_drafts where user_id=current_setting('draft_test.admin')::uuid
     and created_at>=date_trunc('day',now() at time zone 'UTC') at time zone 'UTC';
-  for i in used..9 loop perform public.admin_save_linked_draft(current_setting('draft_test.source')::uuid,null,array['Quota one','Quota two','Quota three'],'dry'); end loop;
+  for i in used..9 loop perform public.admin_save_linked_draft(current_setting('draft_test.source')::uuid,null,array['Quota '||i||' one','Quota '||i||' two','Quota '||i||' three'],'dry'); end loop;
   begin perform public.admin_save_linked_draft(current_setting('draft_test.source')::uuid,null,array['Over quota one','Over quota two','Over quota three'],'dry');
   exception when sqlstate 'P0001' then denied:=true; end;
   if not denied then raise exception 'Admin draft creation bypassed the existing quota'; end if;

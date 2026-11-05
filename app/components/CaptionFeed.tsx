@@ -1,6 +1,7 @@
 import { captionImageUrl } from '@/lib/ai/caption-image';
 import type { HumorStyle } from '@/lib/ai/captions';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { createClient } from '@/utils/supabase/server';
 import CaptionCard, { type Caption } from './CaptionCard';
@@ -17,14 +18,19 @@ function pageHref(filters: CaptionFilters, page: number): string {
   return `/captions?${params.toString()}`;
 }
 
-export default async function CaptionFeed({ canVote, prioritizeRecentLikes = false, filters }: { canVote: boolean; prioritizeRecentLikes?: boolean; filters?: CaptionFilters }) {
+export default async function CaptionFeed({ canVote, prioritizeRecentLikes = false, filters, captionId }: { canVote: boolean; prioritizeRecentLikes?: boolean; filters?: CaptionFilters; captionId?: string }) {
   const supabase = createClient(await cookies());
   const newestCaptions = () => supabase.from('ai_generations').select('id,situation,caption,style,created_at,image_path').order('created_at', { ascending: false }).limit(pageSize);
   let data: Caption[] | null = null;
   let error: { code?: string } | null = null;
   let hasMore = false;
 
-  if (filters) {
+  if (captionId) {
+    const result = await supabase.from('ai_generations').select('id,situation,caption,style,created_at,image_path').eq('id', captionId).maybeSingle();
+    if (!result.error && !result.data) notFound();
+    data = result.data ? [result.data as Caption] : null;
+    error = result.error;
+  } else if (filters) {
     let query = supabase
       .from('ai_generations')
       .select('id,situation,caption,style,created_at,image_path')
@@ -66,7 +72,7 @@ export default async function CaptionFeed({ canVote, prioritizeRecentLikes = fal
   const voteMap = new Map<string,number>((votes ?? []).map((r: {generation_id:string;value:number}) => [r.generation_id,r.value]));
   return (
     <>
-      <p className="mb-4 text-sm text-[var(--muted)]" aria-live="polite">{filters ? `Page ${filters.page} · ${captions.length} meme${captions.length === 1 ? '' : 's'} shown` : 'Latest memes'}</p>
+      <p className="mb-4 text-sm text-[var(--muted)]" aria-live="polite">{filters ? `Page ${filters.page} · ${captions.length} meme${captions.length === 1 ? '' : 's'} shown` : captionId ? 'Published caption' : 'Latest memes'}</p>
       <div className="space-y-5">{captions.map(c => <CaptionCard key={`${c.id}-${countMap.get(c.id)?.likes}-${countMap.get(c.id)?.dislikes}-${voteMap.get(c.id)}`} caption={c} imageUrl={c.image_path ? captionImageUrl(c.id) : undefined} likes={countMap.get(c.id)?.likes ?? 0} dislikes={countMap.get(c.id)?.dislikes ?? 0} myVote={voteMap.get(c.id) ?? 0} canVote={canVote}/>)}</div>
       {filters && (filters.page > 1 || hasMore) && (
         <nav aria-label="Meme search result pages" className="mt-7 flex items-center justify-between gap-4">

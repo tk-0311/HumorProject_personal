@@ -59,6 +59,7 @@ export default function GenerationForm({ onPublished }: { onPublished?: () => vo
         setError(result.error);
         if (result.id) {
           setPublishedId(result.id);
+          setOptions(empty); setSelected(null);
           if (onPublished) onPublished();
           else router.replace('/');
         }
@@ -99,6 +100,7 @@ export default function GenerationForm({ onPublished }: { onPublished?: () => vo
       {!publishedId && <><button type="button" onClick={publish} disabled={busy || selected === null} className="min-h-11 rounded-lg bg-[var(--foreground)] px-5 py-3 font-bold text-[var(--background)] disabled:opacity-50">{publishing ? 'Publishing…' : 'Publish selected caption'}</button><p className="text-sm text-[var(--muted)]">Your photo and chosen caption will be visible in the feed for others to rate.</p></>}
       {publishedId && <div role="status"><p className="font-bold">Published. Let the people decide.</p><Link href={`/captions#caption-${publishedId}`} className="mt-3 inline-block underline">View your photo and caption</Link></div>}
     </section>}
+    {publishedId&&<div role="status"><p className="font-bold">Published. The other draft options have been removed.</p><Link href={`/captions/${publishedId}`} className="mt-3 inline-block underline">View your photo and caption</Link></div>}
     <p role="status" className="text-sm">{generating ? 'Generating three captions for each humor style…' : publishing ? 'Publishing your selected caption…' : error || (options.draftId && !publishedId ? 'Nine captions are ready. Browse three per style and choose your favorite.' : '')}</p>
   </div>;
 }

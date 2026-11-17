@@ -1,4 +1,5 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
+import { mockMemeImageUrl } from './mock-meme-images';
 
 const imageHeaders = { 'Cache-Control': 'private, no-store', Vary: 'Cookie' };
 
@@ -16,6 +17,14 @@ export async function captionImageResponse(client: SupabaseClient, id: string): 
     .select('image_path').eq('id', id).maybeSingle();
   if (error) return new Response(null, { status: 502, headers: imageHeaders });
   if (!caption?.image_path) return new Response(null, { status: 404, headers: imageHeaders });
+  const mockImage = mockMemeImageUrl(caption.image_path);
+  if (mockImage) {
+    return new Response(null, { status: 307, headers: { ...imageHeaders, Location: mockImage, 'Referrer-Policy': 'no-referrer' } });
+  }
+  // Never turn a stored arbitrary URL into an open redirect.
+  if (caption.image_path.includes('://') || caption.image_path.startsWith('//')) {
+    return new Response(null, { status: 404, headers: imageHeaders });
+  }
   const { data: image, error: imageError } = await client.storage.from('caption-images')
     .createSignedUrl(caption.image_path, 60);
   if (imageError || !image?.signedUrl) {

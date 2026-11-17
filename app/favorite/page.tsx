@@ -32,7 +32,7 @@ export default async function FavoritePage() {
           <section className="app-surface mx-auto max-w-xl rounded-2xl border border-[var(--border)] p-8 text-center">
             <h1 className="text-3xl font-extrabold">Your liked memes</h1>
             <p className="my-4 text-[var(--muted)]">Log in to see the memes you’ve voted “↑ Funny”.</p>
-            <Link href="/login" className="inline-flex min-h-12 items-center rounded-lg bg-[var(--foreground)] px-6 font-bold text-white">Log in</Link>
+            <Link href="/login" className="inline-flex min-h-12 items-center rounded-lg bg-[var(--foreground)] px-6 font-bold text-[var(--background)]">Log in</Link>
           </section>
         </main>
       </>

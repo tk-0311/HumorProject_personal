@@ -19,7 +19,7 @@ export default function LikedCaptionsList({ initialCaptions }: { initialCaptions
       <section className="app-surface rounded-2xl border border-[var(--border)] p-6 text-center">
         <h2 className="text-xl font-bold">No liked memes yet</h2>
         <p className="my-3 text-[var(--muted)]">Tap “↑ Funny” on a meme and it’ll show up here.</p>
-        <Link href="/" className="font-bold underline">Browse captions</Link>
+        <Link href="/meme" className="font-bold underline">Browse memes</Link>
       </section>
     );
   }

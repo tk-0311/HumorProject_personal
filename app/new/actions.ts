@@ -91,6 +91,6 @@ export async function publishCaptionChoice(draftId: string, index: number): Prom
   // Atomic owner check + row lock + insert. A repeated request returns the same post.
   const { data: id, error } = await supabase.rpc('publish_caption_choice', { draft_id: draftId, choice_index: index });
   if (error || !id) return finish({ error: 'Your caption could not be published. Please try again.', id: '' }, false, 'database');
-  revalidatePath('/'); revalidatePath('/captions');
+  revalidatePath('/'); revalidatePath('/captions'); revalidatePath('/meme');
   return finish({ error: '', id }, true);
 }

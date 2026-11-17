@@ -18,7 +18,7 @@ export default function GoogleLoginForm({ label = "Continue with Google" }: { la
       <button
         type="submit"
         disabled={pending}
-        className="flex h-14 w-full items-center justify-center gap-3 rounded-[9px] border border-[var(--border)] bg-white px-5 text-base font-semibold text-[#252923] transition-colors hover:bg-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-strong)] disabled:cursor-wait disabled:opacity-60"
+        className="flex h-14 w-full items-center justify-center gap-3 rounded-[9px] border border-[var(--border)] bg-[var(--surface-raised)] px-5 text-base font-semibold text-[var(--foreground)] transition-colors hover:bg-[var(--menu-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-strong)] disabled:cursor-wait disabled:opacity-60"
       >
         <svg aria-hidden="true" viewBox="0 0 48 48" className="h-5 w-5">
           <path fill="#4285F4" d="M43.6 24.5c0-1.4-.1-2.8-.4-4.1H24v7.8h11a9.4 9.4 0 0 1-4.1 6.2v5.1h6.7c3.9-3.6 6-8.8 6-15Z" />

@@ -1,0 +1,291 @@
+{
+  "batch": "mock-internet-memes-v1",
+  "projectRef": "apbmaxmpvkaltywewlsh",
+  "ownerId": "5725f5d0-f491-4737-83c1-049679099e39",
+  "ownerUsername": "admin",
+  "source": "https://imgflip.com/api",
+  "templates": {
+    "101470": {
+      "name": "Ancient Aliens",
+      "url": "https://i.imgflip.com/26am.jpg",
+      "width": 500,
+      "height": 437,
+      "page": "https://imgflip.com/memetemplate/101470"
+    },
+    "112126428": {
+      "name": "Distracted Boyfriend",
+      "url": "https://i.imgflip.com/1ur9b0.jpg",
+      "width": 1200,
+      "height": 800,
+      "page": "https://imgflip.com/memetemplate/112126428"
+    },
+    "131940431": {
+      "name": "Gru's Plan",
+      "url": "https://i.imgflip.com/26jxvz.jpg",
+      "width": 700,
+      "height": 449,
+      "page": "https://imgflip.com/memetemplate/131940431"
+    },
+    "135256802": {
+      "name": "Epic Handshake",
+      "url": "https://i.imgflip.com/28j0te.jpg",
+      "width": 900,
+      "height": 645,
+      "page": "https://imgflip.com/memetemplate/135256802"
+    },
+    "181913649": {
+      "name": "Drake Hotline Bling",
+      "url": "https://i.imgflip.com/30b1gx.jpg",
+      "width": 1200,
+      "height": 1200,
+      "page": "https://imgflip.com/memetemplate/181913649"
+    },
+    "188390779": {
+      "name": "Woman Yelling At Cat",
+      "url": "https://i.imgflip.com/345v97.jpg",
+      "width": 680,
+      "height": 438,
+      "page": "https://imgflip.com/memetemplate/188390779"
+    },
+    "252600902": {
+      "name": "Always Has Been",
+      "url": "https://i.imgflip.com/46e43q.png",
+      "width": 960,
+      "height": 540,
+      "page": "https://imgflip.com/memetemplate/252600902"
+    },
+    "28251713": {
+      "name": "Oprah You Get A",
+      "url": "https://i.imgflip.com/gtj5t.jpg",
+      "width": 620,
+      "height": 465,
+      "page": "https://imgflip.com/memetemplate/28251713"
+    },
+    "4087833": {
+      "name": "Waiting Skeleton",
+      "url": "https://i.imgflip.com/2fm6x.jpg",
+      "width": 298,
+      "height": 403,
+      "page": "https://imgflip.com/memetemplate/4087833"
+    },
+    "5496396": {
+      "name": "Leonardo Dicaprio Cheers",
+      "url": "https://i.imgflip.com/39t1o.jpg",
+      "width": 600,
+      "height": 400,
+      "page": "https://imgflip.com/memetemplate/5496396"
+    },
+    "55311130": {
+      "name": "This Is Fine",
+      "url": "https://i.imgflip.com/wxica.jpg",
+      "width": 580,
+      "height": 282,
+      "page": "https://imgflip.com/memetemplate/55311130"
+    },
+    "61579": {
+      "name": "One Does Not Simply",
+      "url": "https://i.imgflip.com/1bij.jpg",
+      "width": 568,
+      "height": 335,
+      "page": "https://imgflip.com/memetemplate/61579"
+    },
+    "87743020": {
+      "name": "Two Buttons",
+      "url": "https://i.imgflip.com/1g8my4.jpg",
+      "width": 600,
+      "height": 908,
+      "page": "https://imgflip.com/memetemplate/87743020"
+    },
+    "89370399": {
+      "name": "Roll Safe Think About It",
+      "url": "https://i.imgflip.com/1h7in3.jpg",
+      "width": 702,
+      "height": 395,
+      "page": "https://imgflip.com/memetemplate/89370399"
+    },
+    "93895088": {
+      "name": "Expanding Brain",
+      "url": "https://i.imgflip.com/1jwhww.jpg",
+      "width": 857,
+      "height": 1202,
+      "page": "https://imgflip.com/memetemplate/93895088"
+    },
+    "97984": {
+      "name": "Disaster Girl",
+      "url": "https://i.imgflip.com/23ls.jpg",
+      "width": 500,
+      "height": 375,
+      "page": "https://imgflip.com/memetemplate/97984"
+    }
+  },
+  "posts": [
+    {
+      "topic": "midterms",
+      "style": "dry",
+      "templateId": "4087833",
+      "situation": "Waiting for the professor to release midterm grades.",
+      "caption": "Midterm grades are coming soon. A very flexible definition of soon."
+    },
+    {
+      "topic": "butler",
+      "style": "absurd",
+      "templateId": "101470",
+      "situation": "Every empty seat in Butler Library has a backpack on it.",
+      "caption": "The only explanation for every Butler seat being saved: interdimensional students."
+    },
+    {
+      "topic": "dorm-life",
+      "style": "wholesome",
+      "templateId": "28251713",
+      "situation": "A roommate brings enough snacks for everyone in the dorm.",
+      "caption": "My roommate bought extra snacks and suddenly the dorm felt like home."
+    },
+    {
+      "topic": "dining-hall",
+      "style": "dry",
+      "templateId": "188390779",
+      "situation": "Trying to identify today's special in the dining hall.",
+      "caption": "The dining hall called it a seasonal bowl. The season is confusion."
+    },
+    {
+      "topic": "subway",
+      "style": "absurd",
+      "templateId": "252600902",
+      "situation": "The subway has been one minute away for twenty minutes.",
+      "caption": "Wait, the MTA countdown is measured in dog years? Always has been."
+    },
+    {
+      "topic": "coffee",
+      "style": "wholesome",
+      "templateId": "5496396",
+      "situation": "A friend remembers your coffee order before an early class.",
+      "caption": "To the friend who knows my coffee order: you are the most reliable part of my morning."
+    },
+    {
+      "topic": "study-groups",
+      "style": "dry",
+      "templateId": "112126428",
+      "situation": "The study group discovers a much more interesting conversation than the problem set.",
+      "caption": "Our study group has covered everything except the material."
+    },
+    {
+      "topic": "professors",
+      "style": "absurd",
+      "templateId": "93895088",
+      "situation": "The professor says the final exam is cumulative, including knowledge from before birth.",
+      "caption": "Lecture notes. Textbook. Entire internet. The professor's childhood memories. All on the exam."
+    },
+    {
+      "topic": "midterms",
+      "style": "wholesome",
+      "templateId": "135256802",
+      "situation": "A friend shares their exam notes and helps you prepare for midterms.",
+      "caption": "You brought the notes. I brought the snacks. We brought each other through midterms."
+    },
+    {
+      "topic": "butler",
+      "style": "dry",
+      "templateId": "61579",
+      "situation": "Searching Butler Library for a quiet seat next to an available outlet.",
+      "caption": "One does not simply find an outlet in Butler."
+    },
+    {
+      "topic": "dorm-life",
+      "style": "absurd",
+      "templateId": "131940431",
+      "situation": "A roommate's plan to make a tiny dorm room feel bigger gets out of hand.",
+      "caption": "Step 1: rearrange the dorm. Step 2: remove the furniture. Step 3: become the furniture."
+    },
+    {
+      "topic": "dining-hall",
+      "style": "wholesome",
+      "templateId": "135256802",
+      "situation": "A friend saves the last cookie at John Jay dining hall.",
+      "caption": "A friend saved me the last cookie at John Jay. Small cookie. Enormous act of friendship."
+    },
+    {
+      "topic": "subway",
+      "style": "dry",
+      "templateId": "4087833",
+      "situation": "Waiting for the next subway train while the arrival estimate keeps changing.",
+      "caption": "The MTA says the train is arriving. I admire its optimism."
+    },
+    {
+      "topic": "coffee",
+      "style": "absurd",
+      "templateId": "55311130",
+      "situation": "Having another coffee after already drinking four espressos.",
+      "caption": "Five coffees in. I can hear the Wi-Fi, but the deadline still can't hear me."
+    },
+    {
+      "topic": "study-groups",
+      "style": "wholesome",
+      "templateId": "135256802",
+      "situation": "A study buddy patiently explains the same problem for the fourth time.",
+      "caption": "A good study buddy explains it again without making you feel bad for asking."
+    },
+    {
+      "topic": "professors",
+      "style": "dry",
+      "templateId": "181913649",
+      "situation": "The professor says the lecture slides will be posted after class.",
+      "caption": "Taking notes during lecture? No. Refreshing the course page until the slides appear? Absolutely."
+    },
+    {
+      "topic": "midterms",
+      "style": "absurd",
+      "templateId": "97984",
+      "situation": "Finishing an exam after studying every chapter except the one on the test.",
+      "caption": "I studied every chapter except the one on the midterm. An impressively precise miss."
+    },
+    {
+      "topic": "butler",
+      "style": "wholesome",
+      "templateId": "5496396",
+      "situation": "Someone leaves an encouraging note on your desk in Butler Library.",
+      "caption": "A stranger left a 'you've got this' note in Butler. For a moment, I believed both of us."
+    },
+    {
+      "topic": "dorm-life",
+      "style": "dry",
+      "templateId": "87743020",
+      "situation": "Choosing between sleep and a late-night microwave snack while your roommate is asleep.",
+      "caption": "Roommate asleep. Microwave beeping. Diplomacy has entered its hardest hour."
+    },
+    {
+      "topic": "dining-hall",
+      "style": "absurd",
+      "templateId": "101470",
+      "situation": "The Ferris dining hall pasta seems to have a personality of its own.",
+      "caption": "Ferris pasta achieved sentience and immediately asked to change its meal plan."
+    },
+    {
+      "topic": "subway",
+      "style": "wholesome",
+      "templateId": "5496396",
+      "situation": "A stranger helps carry a heavy bag up the subway stairs.",
+      "caption": "Someone carried my bag up the subway stairs. New York still has a soft side."
+    },
+    {
+      "topic": "coffee",
+      "style": "dry",
+      "templateId": "89370399",
+      "situation": "Buying a latte instead of addressing an ever-growing to-do list.",
+      "caption": "If I hold a coffee, it counts as getting a handle on things."
+    },
+    {
+      "topic": "study-groups",
+      "style": "absurd",
+      "templateId": "93895088",
+      "situation": "A study group spends two hours planning the next study group meeting.",
+      "caption": "Our study group formed a committee to schedule the meeting about starting the homework."
+    },
+    {
+      "topic": "professors",
+      "style": "wholesome",
+      "templateId": "5496396",
+      "situation": "A professor stays after office hours to help a student understand a difficult concept.",
+      "caption": "The professor stayed until it clicked. Sometimes the best part of college is someone making time."
+    }
+  ]
+}

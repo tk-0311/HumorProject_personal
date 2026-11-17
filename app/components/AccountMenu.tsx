@@ -3,8 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { signOut } from "./account-actions";
-
-type Theme = "light" | "dark" | "system";
+import { getThemeSnapshot, selectTheme, subscribeToTheme, type Theme } from '@/lib/theme';
 
 type AccountMenuProps = {
   name: string;
@@ -18,22 +17,6 @@ const themeOptions: { value: Theme; label: string }[] = [
   { value: "dark", label: "Dark" },
   { value: "system", label: "System" },
 ];
-
-function getThemeSnapshot(): Theme {
-  const storedTheme = window.localStorage.getItem("humor-project-theme");
-  return storedTheme === "light" || storedTheme === "dark" || storedTheme === "system"
-    ? storedTheme
-    : "system";
-}
-
-function subscribeToTheme(listener: () => void) {
-  window.addEventListener("storage", listener);
-  window.addEventListener("humor-project-theme-change", listener);
-  return () => {
-    window.removeEventListener("storage", listener);
-    window.removeEventListener("humor-project-theme-change", listener);
-  };
-}
 
 function PersonIcon() {
   return (
@@ -49,10 +32,6 @@ export default function AccountMenu({ name, email, isAdmin, adminUrl }: AccountM
   const [themeMenuOpen, setThemeMenuOpen] = useState(false);
   const theme = useSyncExternalStore(subscribeToTheme, getThemeSnapshot, () => "system");
   const menuRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-  }, [theme]);
 
   useEffect(() => {
     if (!open) return;
@@ -82,11 +61,6 @@ export default function AccountMenu({ name, email, isAdmin, adminUrl }: AccountM
   function toggleMenu() {
     setOpen((isOpen) => !isOpen);
     setThemeMenuOpen(false);
-  }
-
-  function selectTheme(nextTheme: Theme) {
-    window.localStorage.setItem("humor-project-theme", nextTheme);
-    window.dispatchEvent(new Event("humor-project-theme-change"));
   }
 
   return (

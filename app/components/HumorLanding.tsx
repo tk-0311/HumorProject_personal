@@ -50,7 +50,6 @@ export default function HumorLanding({ children }: { children: ReactNode }) {
 
   return <div className="humor-landing">
     <a className="skip" href="#main">Skip to content</a>
-    <header className="header"><Link href="/" className="brand" aria-label="HumorProject home"><span className="brand-mark">h<span>p</span><i /></span>humorproject<span className="brand-period">.</span></Link><nav aria-label="Main navigation"><button className="nav-explore" onClick={explore}>Explore</button><Link className="login" href="/login" onMouseEnter={() => setQuip('Back again? Your productivity had a good run.')} onFocus={() => setQuip('Back again? Your productivity had a good run.')}>Log in</Link><Link className="button small dark" href="/signup">Sign up</Link></nav></header>
     <main id="main">
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-copy"><div className="eyebrow"><span className="tiny-star">✳</span> SERIOUSLY UNSERIOUS.</div><h1 id="hero-title">The internet is<br/>already a joke.<br/><span>Might as well<br className="mobile-break"/> join in.</span><svg className="underline" viewBox="0 0 450 25" aria-hidden="true"><path d="M4 17 Q220 -3 445 12 M35 23 Q210 5 394 19" /></svg></h1><p>A little less doomscroll. A little more LOL.<br/>Find your people. Share your funny.</p><div className="hero-actions"><Link href="/signup" className="button dark" onMouseEnter={() => setQuip('Finally. Someone with questionable judgment.')} onFocus={() => setQuip('Finally. Someone with questionable judgment.')}>Join the chaos<span aria-hidden="true">✳</span></Link><button className="button outline" onClick={explore}>Explore Posts</button></div><div className="social-proof"><div className="avatar-stack"><span>M</span><span>J</span><span>B</span><span>A</span></div><span>A place for your kind of weird.<small>All senses of humor welcome.</small></span></div></div>
@@ -64,7 +63,7 @@ export default function HumorLanding({ children }: { children: ReactNode }) {
         </div>
         <div className="landing-post-layout">
           <aside className="landing-post-navigation" aria-label="Browse more posts">
-            <Link href="/?view=feed" className="view-more-memes">View more memes <span aria-hidden="true">→</span></Link>
+            <Link href="/meme" className="view-more-memes">View more memes <span aria-hidden="true">→</span></Link>
           </aside>
           <div className="landing-post-feed">{children}</div>
         </div>

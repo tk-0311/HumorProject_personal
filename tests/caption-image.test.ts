@@ -4,7 +4,7 @@ import { createClient } from '@supabase/supabase-js';
 import { captionImageResponse, captionImageUrl } from '../lib/ai/caption-image';
 
 const id = '11111111-1111-4111-8111-111111111111';
-function fixture({ missing = false, signFailure = false, queryFailure = false } = {}) {
+function fixture({ missing = false, signFailure = false, queryFailure = false, imagePath = 'owner/photo.jpg' } = {}) {
   let queries = 0;
   let signs = 0;
   const client = createClient('https://project.supabase.co', 'test-key', {
@@ -16,7 +16,7 @@ function fixture({ missing = false, signFailure = false, queryFailure = false } 
         assert.equal(url.searchParams.get('select'), 'image_path');
         assert.equal(url.searchParams.get('id'), `eq.${id}`);
         if (queryFailure) return Response.json({ code: '42501', message: 'Denied' }, { status: 403 });
-        return Response.json(missing ? null : { image_path: 'owner/photo.jpg' });
+        return Response.json(missing ? null : { image_path: imagePath });
       }
       assert.equal(url.pathname, '/storage/v1/object/sign/caption-images/owner/photo.jpg');
       assert.equal(JSON.parse(String(init?.body)).expiresIn, 60);
@@ -63,6 +63,32 @@ test('query and signing failures return uncached errors without leaking storage 
     assert.match(response.headers.get('cache-control')!, /no-store/);
     assert.equal(response.headers.get('location'), null);
     assert.equal(await response.text(), '');
+  }
+});
+
+test('published mock images redirect only to the approved image CDN without signing storage', async () => {
+  for (const imagePath of ['https://i.imgflip.com/30b1gx.jpg', 'https://i.imgflip.com/46e43q.png']) {
+    const { client, counts } = fixture({ imagePath });
+    const response = await captionImageResponse(client, id);
+    assert.equal(response.status, 307);
+    assert.equal(response.headers.get('location'), imagePath);
+    assert.equal(response.headers.get('referrer-policy'), 'no-referrer');
+    assert.deepEqual(counts(), { queries: 1, signs: 0 });
+  }
+});
+
+test('external image redirects reject lookalike hosts, credentials, query strings, and unsafe formats', async () => {
+  for (const imagePath of [
+    'https://example.com/photo.jpg', 'https://i.imgflip.com.evil.test/photo.jpg',
+    'https://i.imgflip.com@evil.test/photo.jpg', '//i.imgflip.com/photo.jpg',
+    'http://i.imgflip.com/photo.jpg', 'https://i.imgflip.com/photo.svg',
+    'https://i.imgflip.com/photo.jpg?next=https://evil.test',
+  ]) {
+    const { client, counts } = fixture({ imagePath });
+    const response = await captionImageResponse(client, id);
+    assert.equal(response.status, 404);
+    assert.equal(response.headers.get('location'), null);
+    assert.deepEqual(counts(), { queries: 1, signs: 0 });
   }
 });
 

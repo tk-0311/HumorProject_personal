@@ -4,7 +4,7 @@ import { createClient } from "@/utils/supabase/server";
 import AccountMenu from "./AccountMenu";
 
 const navigationItems: { label: string; href: string; active: boolean }[] = [
-	{ label: "Memes", href: "/captions", active: false },
+	{ label: "Memes", href: "/meme", active: false },
 	{ label: "favorites", href: "/favorite", active: false },
 	// { label: "AI captions", href: "/captions", active: false },
 	// // { label: "Top 100", href: "/", active: true },
@@ -15,10 +15,10 @@ const navigationItems: { label: string; href: string; active: boolean }[] = [
 
 function BrandLink() {
 	return (
-		<Link href="/" aria-label="Humor Project home" className="flex items-center gap-3 text-[22px] font-extrabold tracking-[-1px] leading-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-strong)] sm:text-[25px]">
-			<span aria-hidden="true" className="relative flex h-10 w-10 rotate-[-8deg] items-center justify-center rounded-[13px] border-2 border-[var(--foreground)] bg-[var(--accent)] pr-1 text-[21px] tracking-[-3px]">
+		<Link href="/" aria-label="Humor Project home" className="flex items-center gap-3 text-[22px] font-extrabold tracking-[-1px] leading-none text-[var(--foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-strong)] sm:text-[25px]">
+			<span aria-hidden="true" className="relative flex h-10 w-10 rotate-[-8deg] items-center justify-center rounded-[13px] border-2 border-[#252923] bg-[var(--accent)] pr-1 text-[21px] tracking-[-3px] text-[#252923]">
 				h<span className="translate-y-[2px]">p</span>
-				<i className="absolute bottom-1 left-3 h-[5px] w-[14px] rounded-[50%] border-b-2 border-[var(--foreground)]" />
+				<i className="absolute bottom-1 left-3 h-[5px] w-[14px] rounded-[50%] border-b-2 border-[#252923]" />
 			</span>
 			<span>humorproject<span className="text-[var(--accent-strong)]">.</span></span>
 		</Link>
@@ -31,7 +31,7 @@ function SignedOutNavBar() {
 			<div className="mx-auto flex min-h-[85px] w-full max-w-[1280px] items-center justify-between gap-5 px-5 sm:min-h-[104px] sm:px-[35px]">
 				<BrandLink />
 				<div className="flex items-center gap-3 sm:gap-8">
-					<Link href="/captions" className="text-sm font-semibold transition-colors hover:text-[var(--accent-strong)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-strong)] sm:text-base">Memes</Link>
+					<Link href="/meme" className="text-sm font-semibold transition-colors hover:text-[var(--accent-strong)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-strong)] sm:text-base">Memes</Link>
 					<Link href="/login" className="text-sm font-semibold transition-colors hover:text-[var(--accent-strong)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-strong)] sm:text-base">
 						Login
 					</Link>
@@ -46,7 +46,7 @@ function SignedOutNavBar() {
 
 function SignedInNavBar({ name, email, isAdmin, adminUrl }: { name: string; email: string; isAdmin: boolean; adminUrl?: string }) {
 	return (
-		<header className="relative z-40 min-h-[85px] overflow-visible border-b border-[var(--border)] bg-[var(--background)] text-[var(--muted)] sm:min-h-[104px]">
+		<header className="relative z-40 min-h-[85px] overflow-visible border-b border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] sm:min-h-[104px]">
 			<div className="mx-auto flex min-h-[85px] max-w-[1280px] flex-wrap items-center justify-between gap-x-10 gap-y-3 overflow-visible px-5 py-4 sm:min-h-[104px] sm:flex-nowrap sm:px-[35px]">
 				<div className="flex w-full shrink-0 items-center justify-between gap-8 sm:w-auto sm:justify-start sm:gap-[76px]">
 					<BrandLink />
@@ -63,7 +63,7 @@ function SignedInNavBar({ name, email, isAdmin, adminUrl }: { name: string; emai
 								key={label}
 								href={href}
 								aria-current={active ? "page" : undefined}
-								className={`shrink-0 text-sm font-semibold transition-colors hover:text-[var(--foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-strong)] sm:text-base ${active ? "text-[var(--accent-strong)]" : "text-[var(--muted)]"}`}
+								className={`shrink-0 text-sm font-semibold transition-colors hover:text-[var(--accent-strong)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-strong)] sm:text-base ${active ? "text-[var(--accent-strong)]" : "text-[var(--foreground)]"}`}
 							>
 								{label}
 							</Link>
